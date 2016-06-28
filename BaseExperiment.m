@@ -1,6 +1,11 @@
 function BaseExperiment(expnum, mats, Kvals, randwfn, randicfn, ...
-    preprocfn, deltat, endtime, ntrials, reps, tsplits, freq)
+    preprocfn, deltat, endtime, ntrials, reps, tsplits, freq, ...
+    networkInferenceFn, numDiagnostics)
 
+if nargin <= 12
+    networkInferenceFn = @(data) DemoMVGC(data);
+    numDiagnostics = 3;
+end
 
 % make directory to hold results files
 mkdir(sprintf('exp%s',expnum))
@@ -17,9 +22,7 @@ nKvals = length(Kvals); % number of connection strengths
 tableTrueEdges = zeros(numMats, 1);
 tableResultsNorm = zeros(numMats, nKvals, reps, numSplits); 
 tableResultsNormVoting = zeros(numMats, nKvals);
-tableResultsWarn = zeros(numMats, nKvals, reps, numSplits);
-tableResultsOrder = zeros(numMats, nKvals, reps, numSplits);
-tableResultsDiffCheck = zeros(numMats, nKvals, reps, numSplits);
+tableResultsDiagnostics = zeros(numMats, nKvals, reps, numSplits, numDiagnostics);
 tableResultsInfEdges = zeros(numMats, nKvals, reps, numSplits);
 tableResultsInfEdgesVoting = zeros(numMats, nKvals);
 tableResultsFalsePos = zeros(numMats, nKvals, reps, numSplits);
@@ -39,7 +42,7 @@ Y1 = zeros(nvars, nobs, reps);
 
 % est holds Granger Causality's estimate of the networks
 est = zeros(nvars, nvars, reps, numSplits);
-decay = cell(reps,numSplits);
+%decay = cell(reps,numSplits);
 
 % rseries holds the average of r(t) (synchrony measure) for each rep
 rseries = zeros(nobs, reps);
@@ -69,15 +72,14 @@ for j = 1:numMats
             beg = 1; % beginning of first time interval
             for s = 1:numSplits
                 % run Granger Causality on this time interval
-                [est(:,:,r,s), acminlags, morder, diffCheck, decay{r,s}] = DemoMVGC(X(:,beg:tsplits(s),:), truth);
+                [est(:,:,r,s), diagnostics] = networkInferenceFn(X(:,beg:tsplits(s),:));
+                %[est(:,:,r,s), acminlags, morder, diffCheck, decay{r,s}] = networkInferenceFn(X(:,beg:tsplits(s),:), truth);
                 beg = tsplits(s)+1; % beginning for next time interval
                 count = count + 1;
 
                 % save results
                 tableResultsNorm(j, k, r, s) = norm(est(:,:,r,s) - truth)/norm(truth);
-                tableResultsWarn(j, k, r, s) = acminlags-1000;
-                tableResultsOrder(j, k, r, s) = morder;
-                tableResultsDiffCheck(j, k, r, s) = diffCheck;
+                tableResultsDiagnostics(j, k, r, s, :) = diagnostics;
                 tableResultsInfEdges(j, k, r, s) = nnz(est(:,:,r,s)); 
                 tableResultsFalsePos(j, k, r, s) = length(find(est(:,:,r,s) - truth == 1)); 
                 tableResultsFalseNeg(j, k, r, s) = length(find(truth - est(:,:,r,s) == 1));
@@ -98,7 +100,7 @@ for j = 1:numMats
         tableResultsFalseNegVoting(j, k) = length(find(truth - votingMat == 1));
         tableResultsPerWrongVoting(j, k) = length(find(truth ~= votingMat))/possedges;
         
-        save(sprintf('./exp%s/Exp%s-Mat%d-k%d.mat',expnum,expnum,j,k),'truth','X1','theta1','Y1','rseries','decay','est','tsplits')
+        save(sprintf('./exp%s/Exp%s-Mat%d-k%d.mat',expnum,expnum,j,k),'truth','X1','theta1','Y1','rseries','est','tsplits')
     end
 end
 save(sprintf('./exp%s/exp%s-partial.mat',expnum,expnum));

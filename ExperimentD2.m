@@ -1,9 +1,10 @@
-% for comparison to GCT
+% for comparison between MVGC, GCCA, GCT, eGC (and basic GC coming with
+% eGC)
 
 load('UsualParams.mat')
 expnum = 'D2';
 
-load('../GCT/UsualParams.mat','mats')
+mats = smallMats;
 ntrials = 1;
 reps = 50;
 

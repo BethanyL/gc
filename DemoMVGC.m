@@ -58,7 +58,7 @@
 % installation directory for licensing terms.
 %
 %%
-function [mat, acminlags, morder, diffCheck, decay] = DemoMVGC(X, AT)
+function [mat, diagnostics] = DemoMVGC(X)
 %% Parameters
 
 ntrials   = size(X, 3);     % number of trials
@@ -96,18 +96,18 @@ ptoc('*** tsdata_to_infocrit took ');
 %plot_tsdata([AIC BIC]',{'AIC','BIC'},1/fs);
 %title('Model order estimation');
 
-amo = size(AT,3); % actual model order
+%amo = size(AT,3); % actual model order
 
 fprintf('\nbest model order (AIC) = %d\n',moAIC);
 fprintf('best model order (BIC) = %d\n',moBIC);
-fprintf('actual model order     = %d\n',amo);
+%fprintf('actual model order     = %d\n',amo);
 
 % Select model order.
 
-if     strcmpi(morder,'actual')
-    morder = amo;
-    fprintf('\nusing actual model order = %d\n',morder);
-elseif strcmpi(morder,'AIC')
+% if     strcmpi(morder,'actual')
+%     morder = amo;
+%     fprintf('\nusing actual model order = %d\n',morder);
+if strcmpi(morder,'AIC')
     morder = moAIC;
     fprintf('\nusing AIC best model order = %d\n',morder);
 elseif strcmpi(morder,'BIC')
@@ -234,5 +234,6 @@ else
 	diffCheck = mad - madthreshold;
 end
 
+diagnostics = [acminlags-1000, morder, diffCheck];
 %%
 % <mvgc_demo.html back to top>
