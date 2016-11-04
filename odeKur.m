@@ -1,9 +1,29 @@
 function dy = odeKur(t,y,param)
+%
+% definition of ODE for Kuramoto model, to be passed to ode45
+% 
+% INPUTS:
+%
+% t
+%       current time (not used) 
+%
+% y
+%       an [n x 1] vector of the current state
+% 
+% param 
+%       parameters that we need for the Kuramoto model
+%       param{1} = number of nodes, n
+%       param{2} = [n x n] adjacency matrix, A
+%       param{3} = [n x 1] natural frequencies, w
+%       param{4} = scalar connection strength, K
+%
+% OUTPUTS:
+%
+% dy
+%       an [n x 1] vector of y'
 
-%     param{1} = number of nodes
-%     param{2} = adjacency matrix
-%     param{3} = natural frequencies
-%     param{4} = connection strength
+
+
 
     % dy = change in phase
     % y  = phase
