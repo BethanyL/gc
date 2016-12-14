@@ -8,13 +8,13 @@ BaseExperiment.m is the main function. It has many parameters so that everything
 
 Instructions:
 
-1. download code from Github
+1. Download the code from Github.
 
-2. to test the same toolboxes that we did did, download & install their code:
+2. To test the same toolboxes that we did did, download & install their code:
 
   - [Multivariate Granger Causality Toolbox](http://users.sussex.ac.uk/~lionelb/MVGC/) (MVGC) the one that most of the experiments use
 
-  - [extended Granger Causality](http://www.lucafaes.net/eGC.html) (eGC) 
+  - [Extended Granger Causality](http://www.lucafaes.net/eGC.html) (eGC) 
 
   - [Granger Causlity Test](http://www.lcs.poli.usp.br/~baccala/BIHExtension2014/) (GCT) 
 
@@ -23,3 +23,5 @@ Instructions:
 To test different code for network inference, change the input networkInferenceFn to another function that accepts the time series data as input and outputs an adjacency matrix and any number of diagnostics. The input numDiagnostics states how many diagnostics you expect networkInferenceFn to output. The defaults here are at the top of BaseExperiment.m. 
 
 Note: the time series data dimensions should be nodes, then time, then random trials (having a third dimension, or multiple random trials, is optional).
+
+See Tables I, III, and VI in the paper for summaries of the experiments and how they relate to the figures. 
