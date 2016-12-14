@@ -7,11 +7,17 @@ The code was written by Bethany Lusch and is entirely in Matlab. It is posted so
 BaseExperiment.m is the main function. It has many parameters so that everything can be varied. UsualParams.mat contain the default parameters. ExperimentA1.m, ExperimentA2.m, ... are scripts that call BaseExperiment.m. They load UsualParams.mat and change whichever parameters are different for that experiment. See SetUsualParams.m for how UsualParams.mat was created.
 
 Instructions:
+
 1. download code from Github
+
 2. to test the same toolboxes that we did did, download & install their code:
-- [Multivariate Granger Causality Toolbox](http://users.sussex.ac.uk/~lionelb/MVGC/) (MVGC) the one that most of the experiments use
-- [extended Granger Causality](http://www.lucafaes.net/eGC.html) (eGC) 
-- [Granger Causlity Test](http://www.lcs.poli.usp.br/~baccala/BIHExtension2014/) (GCT) 
+
+  - [Multivariate Granger Causality Toolbox](http://users.sussex.ac.uk/~lionelb/MVGC/) (MVGC) the one that most of the experiments use
+
+  - [extended Granger Causality](http://www.lucafaes.net/eGC.html) (eGC) 
+
+  - [Granger Causlity Test](http://www.lcs.poli.usp.br/~baccala/BIHExtension2014/) (GCT) 
+
 3. Run scripts ExperimentA1.m, ExperimentA2.m,... if you wish to recreate the results, or create your own variations.
 
 To test different code for network inference, change the input networkInferenceFn to another function that accepts the time series data as input and outputs an adjacency matrix and any number of diagnostics. The input numDiagnostics states how many diagnostics you expect networkInferenceFn to output. The defaults here are at the top of BaseExperiment.m. 
