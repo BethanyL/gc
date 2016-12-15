@@ -1,6 +1,6 @@
 This is the code used for [the paper](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.94.032220) "Inferring connectivity in networked dynamical systems: Challenges using Granger causality" by Bethany Lusch, Pedro D. Maia, and J. Nathan Kutz, published in Physical Review E in September 2016. 
 
-We systematically test pairwise-conditional Granger causality on data generated from a nonlinear model with known causal network structure. Specifically, we simulate networked systems of Kuramoto oscillators and use the [Multivariate Granger Causality Toolbox](http://users.sussex.ac.uk/~lionelb/MVGC/) to discover the underlying coupling structure of the system. We compare the inferred results to the original connectivity for a wide range of parameters.
+We systematically test pairwise-conditional Granger causality on data generated from a nonlinear model with known causal network structure. Specifically, we simulate networked systems of Kuramoto oscillators and use the [Multivariate Granger Causality Toolbox](http://users.sussex.ac.uk/~lionelb/MVGC/) to reconstruct the underlying network. We compare the results to the ground truth for a wide range of parameters.
 
 The code was written by Bethany Lusch and is entirely in Matlab. It is posted so that you can recreate the results of the paper, but it is also designed so that it can be a suite of tests for any network inference method. 
 
