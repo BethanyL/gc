@@ -1,5 +1,8 @@
 % for comparison between MVGC, GCCA, GCT, eGC (and basic GC coming with
 % eGC)
+% GCCA is Granger Causal Connectivity Analysis, the predecessor 
+% to MVGC. In DemoGCCA, we use an option in the MVGC to use the
+% GCCA version. 
 
 load('UsualParams.mat')
 expnum = 'D2_GCCA';

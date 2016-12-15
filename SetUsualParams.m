@@ -1,5 +1,5 @@
-% This script saves a file with the parameters we usually want to use in
-% our experiments. We can then load this file and change the parts that we
+% This script saves a .mat file with the parameters we usually want to use in
+% our experiments. We can then load that .mat file and change the parts that we
 % want to experiment with.
 
 clear all; close all; clc;

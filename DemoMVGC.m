@@ -1,7 +1,25 @@
 %%
 % this function is a slight variation on the demo provided by the MVGC
 % toolbox, written by Bethany Lusch for testing
-
+%
+% INPUTS:
+%
+% X 
+%       [n x m x N] matrix of time series data (n nodes, m time points, N time series)   
+%
+% OUTPUTS:
+%
+% mat
+%       [n x n] inferred adjacency matrix
+%
+% diagnostics
+%       vector of diagnostics about this run: [warning, morder, diffCheck], where 
+%       warning: number of autovariance lags over 1000 (acmaxlags = 1000)
+%       morder: model order chosen
+%       diffCheck: non-zero if 'WARNING: high maximum absolute difference = %e.2 (> %.2e)\n'
+%       is received (specifically it's the amount past the threshold)
+%
+% below are comments from MVGC toolbox: 
 %% MVGC demo
 %
 % Demonstrates typical usage of the MVGC toolbox on generated VAR data for a
@@ -234,6 +252,6 @@ else
 	diffCheck = mad - madthreshold;
 end
 
-diagnostics = [acminlags-1000, morder, diffCheck];
+diagnostics = [acminlags-acmaxlags, morder, diffCheck];
 %%
 % <mvgc_demo.html back to top>

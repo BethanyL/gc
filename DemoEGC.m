@@ -1,9 +1,30 @@
 %% test of GC and eGC analysis on simulated data
-% This implements the simulation of Schiatti L, Nollo G, Rossato G, and Faes L 2015 Extended Granger causality: a new tool to identify the structure of physiological networks. Physiological Measurement
+% this is a variation of code provided with 
+% Schiatti L, Nollo G, Rossato G, and Faes L 2015 Extended Granger causality: a new tool to identify the structure of physiological networks. Physiological Measurement
+% that interfaces with the rest of their code. See ExperimentD2_EGCandGC.m for an example of its use.  
+%
+% INPUTS:
+%
+% X 
+%       [n x m x N] matrix of time series data (n nodes, m time points, N time series)
+%
+% p
+%       scalar: model order
+%
+% eFlag
+%       1 for extended GC, 0 for non-extended     
+%
+% OUTPUTS:
+%
+% votingmat
+%       [n x n] inferred adjacency matrix
+%
+% dummy
+%       BaseExperiment.m expects networkInferencefn to return diagnostics. We don't have 
+%       any here, so we return a dummy variable
+%
 
 function [votingmat, dummy] = DemoEGC(X, p, eFlag)
-% p is model order
-% eFlag = 1 for extended GC, = 0 for non-extended
 
 dummy = []; % don't have any diagnostics, but caller code expects return
 

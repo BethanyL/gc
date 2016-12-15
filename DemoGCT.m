@@ -7,6 +7,21 @@ function [est, Portmanteau] = DemoGCT(u)
 %            http://dx.doi.org/10.1016/S0079-6123(01)30004-3
 %
 % code adapted by Bethany Lusch
+%
+% INPUTS:
+%
+% u 
+%       [n x m x N] matrix of time series data (n nodes, m time points, N time series)    
+%
+% OUTPUTS:
+%
+% est
+%       [n x n] inferred adjacency matrix
+%
+% Portmanteau
+%       BaseExperiment.m expects networkInferencefn to return diagnostics. 
+%       if Portmanteau == 0, Poor MAR model fitting
+%
 
 
 [nvars, nobs, ~] = size(u);

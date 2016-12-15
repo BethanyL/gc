@@ -1,7 +1,24 @@
 %%
 % this function is a slight variation on the demo provided by the MVGC
 % toolbox, written by Bethany Lusch for testing
-
+%
+% INPUTS:
+%
+% X 
+%       [n x m x N] matrix of time series data (n nodes, m time points, N time series)   
+%
+% OUTPUTS:
+%
+% mat
+%       [n x n] inferred adjacency matrix
+%
+% diagnostics
+%       vector of diagnostics about this run: [warningRho, morder, warningPosDef], where 
+%       warningRho is binary: 1 if received 'WARNING: unstable VAR (unit root)' and 0 otherwise
+%       morder is the model order chosen
+%       warningPosDef is binary: 1 if received 'WARNING: residuals covariance matrix not positive-definite' and 0 otherwise
+%
+% below are comments from MVGC toolbox: 
 %% MVGC "GCCA compatibility mode" demo
 %
 % Demonstrates usage of the MVGC toolbox in "GCCA compatibility mode"; see
